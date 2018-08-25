@@ -1,6 +1,6 @@
 # Introduction
 
-`SimpleAlert` is a very light weight, simplified version of iOS `UIAlertController` and `UIAlertAction`. These two Classes are clunky and lead to lengthy code. This library is intended to clean up the implementation and reduce code length all in a very light weight package.
+`SimpleAlert` is a very light weight, simplified version of iOS `UIAlertController` and `UIAlertAction`. These two Classes are clunky and lead to lengthy code. This library is intended to clean up the implementation and improve readability.
 
 # Current Implementation
 
