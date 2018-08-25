@@ -1,8 +1,8 @@
-#Introduction
+# Introduction
 
 `SimpleAlert` is a very light weight, simplified version of iOS `UIAlertController` and `UIAlertAction`. These two Classes are clunky and lead to lengthy code. This library is intended to clean up the implementation and reduce code length all in a very light weight package.
 
-#Current Implementation
+# Current Implementation
 
 iOS current implementation using `UIAlertController` and `UIAlertAction` you end up with this lengthy code for something simple.
 
@@ -15,7 +15,7 @@ alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
 present(alert, animated: true, completion: nil)
 ```
 
-#SimpleAlert Implementation
+# SimpleAlert Implementation
 
 The above's equivalent with Simple alert
 
@@ -29,7 +29,7 @@ self.alert.with(
 .show()
 ```
 
-#SimpleAlert Advanced
+# SimpleAlert Advanced
 
 `SimpleAlert` helps to solve some problems that other libraries have. `SimpleAlert` doesn't use a wrapper around `UIAlertController`, but is a `UIAlertController` directly.
 
