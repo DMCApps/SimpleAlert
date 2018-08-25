@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SimpleAlert
 
 class ViewController: UIViewController {
 
@@ -45,6 +46,25 @@ class ViewController: UIViewController {
     // MARK: Accessors
     
     // MARK: Actions
+    
+    @IBAction func oldSchoolAlert(_ sender: UIButton) {
+        let alert = UIAlertController(title: "Old Alert", message: "This is an old style alert.", preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        
+        present(alert, animated: true, completion: nil)
+    }
+
+    @IBAction func SimpleAlert1(_ sender: UIButton) {
+        self.alert.with(
+            .title("New Alert"),
+            .message("This is a new style Alert."),
+            .action(.default("OK"), nil),
+            .action(.cancel("Cancel"), nil)
+        )
+        .show()
+    }
     
     // MARK: Public
     

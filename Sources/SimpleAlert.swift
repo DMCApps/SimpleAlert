@@ -21,11 +21,11 @@ public enum AvailableActionTypes {
     fileprivate func asUIAlertActionStyle() -> UIAlertActionStyle {
         switch self {
         case .destructive(_):
-            return UIAlertActionStyle.destructive
+            return .destructive
         case .cancel(_):
-            return UIAlertActionStyle.cancel
+            return .cancel
         default:
-            return UIAlertActionStyle.default
+            return .default
         }
     }
     
