@@ -15,7 +15,7 @@ fileprivate func unwrapStringAndLocalize(_ value:String?) -> String? {
     return value
 }
 
-public enum AvailableActionTypes {
+public enum AvailableActionType {
     case cancel(String), `default`(String), destructive(String)
     
     fileprivate func asUIAlertActionStyle() -> UIAlertActionStyle {
@@ -37,11 +37,12 @@ public enum AvailableActionTypes {
     }
 }
 
-public enum AlertParams {
+public indirect enum AlertParam {
     case title(String?),
     message(String?),
     style(UIAlertControllerStyle),
-    action(AvailableActionTypes, ((UIAlertAction) -> Swift.Void)?)
+    action(AvailableActionType, ((UIAlertAction) -> Swift.Void)?),
+    `if`(Bool, AlertParam, AlertParam?)
     
     fileprivate func createAction() -> UIAlertAction? {
         guard case let .action(style, handler) = self else { return nil }
@@ -74,18 +75,9 @@ public extension UIAlertController {
             self.weakViewController = viewController
         }
         
-        public func with(_ alertParams: AlertParams...) -> Self {
+        public func with(_ alertParams: AlertParam...) -> Self {
             for alertParam in alertParams {
-                switch(alertParam) {
-                case .title(let paramTitle):
-                    self.title = unwrapStringAndLocalize(paramTitle)
-                case .message(let paramMessage):
-                    self.message = unwrapStringAndLocalize(paramMessage)
-                case .style(let paramStyle):
-                    self.preferredStyle = paramStyle
-                case .action(_, _):
-                    self.actions.append(alertParam.createAction()!)
-                }
+                resolveAlertParam(alertParam)
             }
             return self
         }
@@ -113,6 +105,25 @@ public extension UIAlertController {
             }
             
             return alert
+        }
+        
+        private func resolveAlertParam(_ alertParam: AlertParam) {
+            switch(alertParam) {
+            case .title(let paramTitle):
+                self.title = unwrapStringAndLocalize(paramTitle)
+            case .message(let paramMessage):
+                self.message = unwrapStringAndLocalize(paramMessage)
+            case .style(let paramStyle):
+                self.preferredStyle = paramStyle
+            case .action(_, _):
+                self.actions.append(alertParam.createAction()!)
+            case .if(let condition, let paramAlertActionTrue, let paramAlertActionElse):
+                if condition {
+                    self.resolveAlertParam(paramAlertActionTrue)
+                } else if let paramAlertActionElse = paramAlertActionElse {
+                    self.resolveAlertParam(paramAlertActionElse)
+                }
+            }
         }
 
     }

@@ -91,15 +91,24 @@ class ViewController: UIViewController {
         self.alert.with(
             .title("New Alert"),
             .message("This is a new style Alert."),
-            .action(.default("Option 1"), { _ in
-                self.didClickOption1()
-            }),
-            .action(.default("Option 2"), { _ in
-                self.didClickOption2()
-            }),
-            .action(.destructive("Option 3"), { _ in
-                self.didClickOption3()
-            }),
+            .if(numberOfButtons > 0,
+                .action(.default("Option 1"), { _ in
+                    self.didClickOption1()
+                }),
+                nil
+            ),
+            .if(numberOfButtons > 1,
+                .action(.default("Option 2"), { _ in
+                    self.didClickOption2()
+                }),
+                nil
+            ),
+            .if(numberOfButtons > 2,
+                .action(.destructive("Option 3"), { _ in
+                    self.didClickOption3()
+                }),
+                nil
+            ),
             .action(.cancel("Cancel"), nil)
             )
             .show()
