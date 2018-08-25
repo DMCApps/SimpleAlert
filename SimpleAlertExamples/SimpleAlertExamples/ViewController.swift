@@ -43,8 +43,8 @@ class ViewController: UIViewController {
                 self.didClickOption3()
             }),
             .action(.cancel("Cancel"), nil)
-            )
-            .show()
+        )
+        .show()
     }
     
     @IBAction func clickedNumberOfButtons(_ sender: UIButton) {
@@ -65,24 +65,24 @@ class ViewController: UIViewController {
             )
         
         if numberOfButtons > 0 {
-            let _ = alertBuilder.with(.action(.default("Option 1"), { _ in
+            _ = alertBuilder.with(.action(.default("Option 1"), { _ in
                 self.didClickOption1()
             }))
         }
         
         if numberOfButtons > 1 {
-            let _ = alertBuilder.with(.action(.default("Option 2"), { _ in
+            _ = alertBuilder.with(.action(.default("Option 2"), { _ in
                 self.didClickOption2()
             }))
         }
         
         if numberOfButtons > 2 {
-            let _ = alertBuilder.with(.action(.destructive("Option 3"), { _ in
+            _ = alertBuilder.with(.action(.destructive("Option 3"), { _ in
                 self.didClickOption3()
             }))
         }
         
-        let _ = alertBuilder.with(.action(.cancel("Cancel"), nil))
+        _ = alertBuilder.with(.action(.cancel("Cancel"), nil))
         
         alertBuilder.show()
     }
@@ -91,27 +91,18 @@ class ViewController: UIViewController {
         self.alert.with(
             .title("New Alert"),
             .message("This is a new style Alert."),
-            .if(numberOfButtons > 0,
-                .action(.default("Option 1"), { _ in
-                    self.didClickOption1()
-                }),
-                nil
-            ),
-            .if(numberOfButtons > 1,
-                .action(.default("Option 2"), { _ in
-                    self.didClickOption2()
-                }),
-                nil
-            ),
-            .if(numberOfButtons > 2,
-                .action(.destructive("Option 3"), { _ in
-                    self.didClickOption3()
-                }),
-                nil
-            ),
+            .if(numberOfButtons > 0, .action(.default("Option 1"), { _ in
+                self.didClickOption1()
+            })),
+            .if(numberOfButtons > 1, .action(.default("Option 2"), { _ in
+                self.didClickOption2()
+            })),
+            .if(numberOfButtons > 2, .action(.destructive("Option 3"), { _ in
+                self.didClickOption3()
+            })),
             .action(.cancel("Cancel"), nil)
-            )
-            .show()
+        )
+        .show()
     }
     
     @IBAction func SimpleStyleSheet1(_ sender: UIButton) {
@@ -129,8 +120,8 @@ class ViewController: UIViewController {
                 self.didClickOption3()
             }),
             .action(.cancel("Cancel"), nil)
-            )
-            .show()
+        )
+        .show()
     }
     
     // MARK: Public

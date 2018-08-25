@@ -42,7 +42,8 @@ public indirect enum AlertParam {
     message(String?),
     style(UIAlertControllerStyle),
     action(AvailableActionType, ((UIAlertAction) -> Swift.Void)?),
-    `if`(Bool, AlertParam, AlertParam?)
+    `if`(Bool, AlertParam),
+    ifelse(Bool, AlertParam, AlertParam)
     
     fileprivate func createAction() -> UIAlertAction? {
         guard case let .action(style, handler) = self else { return nil }
@@ -117,10 +118,14 @@ public extension UIAlertController {
                 self.preferredStyle = paramStyle
             case .action(_, _):
                 self.actions.append(alertParam.createAction()!)
-            case .if(let condition, let paramAlertActionTrue, let paramAlertActionElse):
+            case .if(let condition, let paramAlertActionTrue):
                 if condition {
                     self.resolveAlertParam(paramAlertActionTrue)
-                } else if let paramAlertActionElse = paramAlertActionElse {
+                }
+            case .ifelse(let condition, let paramAlertActionTrue, let paramAlertActionElse):
+                if condition {
+                    self.resolveAlertParam(paramAlertActionTrue)
+                } else {
                     self.resolveAlertParam(paramAlertActionElse)
                 }
             }
